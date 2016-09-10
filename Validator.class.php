@@ -244,12 +244,13 @@ class Validator{
     * @return validator object 
     */
     public function ipInInt(){
-        if(!($this->value >= 0 and $this->value <= 4294967295){
+        if((int)$this->value >= 0 and (int)$this->value <= 4294967295){
             $this->value = long2ip($this->value);
             return $this;
         }
         $this->error++;
         return $this;
+    }
     /**
     * IP version 4 validation
     * 
