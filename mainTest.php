@@ -13,9 +13,10 @@ $arr = array(
     'userName' => 'awdwa', 
     'email' => 'awd',
     'age' => '19',
-    'float' => '2.3',
+    'float'
     
 );
 $y = new MaskValidator($arr, $maskTest);
 ?>
-<pre><?php var_dump($y->answer);?></pre>
+<pre><?php //var_dump($y->answer);?></pre>
+<pre><?php var_dump($arr);?></pre>

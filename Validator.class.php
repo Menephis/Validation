@@ -241,11 +241,15 @@ class Validator{
     /**
     * IP validation in integer
     *
+    * @param int $output - если указать 'string', то ip будет возвращенно в стандартном строковом значении
+    *
     * @return validator object 
     */
-    public function ipInInt(){
+    public function ipInInt($output = 'int'){
         if((int)$this->value >= 0 and (int)$this->value <= 4294967295){
-            $this->value = long2ip($this->value);
+            if($output == 'string'){
+                $this->value = long2ip($this->value);
+            }
             return $this;
         }
         $this->error++;
@@ -253,12 +257,17 @@ class Validator{
     }
     /**
     * IP version 4 validation
+    *
+    * @param string $output - если в output указать int, то ip будет возвращен в целочисленном значении
     * 
     * @return validator object 
     */
-    public function ipV4(){
+    public function ipV4($output = 'string'){
         if(!filter_var($this->value, FILTER_VALIDATE_IP,FILTER_FLAG_IPV4))
-            $this->error++;    
+            $this->error++;
+        if($output == 'int'){
+            $this->value = sprintf('%u', ip2long($this->value));
+        }
         return $this;
     }
     /**

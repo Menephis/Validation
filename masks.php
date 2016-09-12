@@ -2,7 +2,7 @@
 $maskTest = array(
     'userName' => array(
         'latinName' => array(3,16),
-        'required' => true
+        'required' => null
     ),
     'email' =>array(
         'email' => array(8,20),
@@ -21,6 +21,5 @@ $maskTest = array(
         'url' => null,
         'execute' => null
     )
-        
 );
 ?>
