@@ -1,7 +1,8 @@
 <?php
 require_once 'validator.class.php';
 class MaskValidator extends validator{
-    public $answer = array(); 
+    public $_answer = array();
+    public $_error;
     /**
     * Validate on mask
     *
@@ -11,20 +12,29 @@ class MaskValidator extends validator{
     */
     final function __construct(array $data, array $mask){
         try{
+            $validator = new Validator();
             foreach($data as $dataKey => $value){
                 foreach($mask as $key => $field){
-                    if($dataKey == $key){
-                        // Произошло совпадение по маске
-                        $x = new Validator($value);
-                        foreach($field as $function => $arg){
-                            $this->answer[$key] = $x->$function($arg);
+                    if($dataKey === $key){
+                        foreach($field as $method => $args){
+                            if($method == 'required'){
+                                continue;
+                            }else{
+                                $this->_answer[$key] = $validator($method, $value, $args);
+                            }
                         }
-                        unset($x);
                     }
+                    if(isset($field['required']))
+                        $require[] = $key;
                 }
             }
+            foreach($require as $reqs){
+                if(!isset($this->_answer[$reqs]))
+                    throw new Exception('data is not transferred - ' . $reqs);
+            }
         }catch(Exception $e){
-            $this->answer = null;
+            $this->_error = $e;
+            $this->_answer = null;
         }
     }
 }

@@ -1,125 +1,101 @@
 <?php
 class Validator{
-    public $value;
-    private $error = 0;
     /**
-    * Validation length of string
-    * 
-    * @param string $str - string for validate
-    * @param int $range - length
+    * Вызываем функции и передаём туда значения
     *
-    * @return validator object 
-    */
-    public function __construct($val){
-        $this->value = $val;
-    }
-    /**
-    * Check validator for error 
+    * @param string $function - функция валидации переданых значений
+    * @param string $value - значение для валидирования
+    * @param array $args - аргументы передающиеся в функцию
     *
-    * @return mixed $value
+    * @return mixed - возвратятся либо проверенные данные, либо false
     */
-    public function execute(){
-        if($this->error > 0){
-            return false;
+    final public function __invoke($function, $value, $args = null){
+         if(isset($args)){
+            return $this->$function($value, $args);
         }else{
-            return $this->value;       
+            //echo $function . $value . $args . "</br>";
+            return $this->$function($value);
         }
-    } 
-    /**
-    * For require param - throw exception
-    *
-    * @return mixed $value
-    */
-    public function required(){
-        try{
-            if($this->error > 0){
-                throw new Exception($this->error);
-            }else{
-                return $this->value;       
-            }  
-        }catch(Exception $e){
-            throw new Exception($e);
-        }
-        
     }
     /**
-    * Check length of string
+    * Проверка на длину строки
     *
-    * @param array $range - min and max length of string(example: array(3,10))
+    * @param mixed $value - проверяемое значение
+    * @param array $range - минимальная и максимальная длина строки(пример: array(3,10))
     *
     * @return validator object
     */
-    public function minMaxLength(array $range){
-        if((strlen($this->value) < (int)$range[0]) or (strlen($this->value) > (int)$range[1]))
-            $this->error++;
-        return $this;
+    final public function minMaxLength($value ,array $range){
+        if((strlen($value) < (int)$range[0]) or (strlen($value) > (int)$range[1]))
+            return false;
+        return $value;
     }
     /**
-    * Validation integer 
+    * Валидация integer
     *
-    * @param integer $int
+    * @param mixed $value - проверяемое значение
     *
-    * @return validator object 
+    * @return mixed - false/$value
     */
-    public function int(){
-        if(!filter_var($this->value, FILTER_VALIDATE_INT))
-            $this->error++;    
-        return $this;
+    final public function int($value){
+        if(!filter_var($value, FILTER_VALIDATE_INT))
+            return false;
+        return $value;
     }
     /**
-    * Validation for a range of numbers
+    * Проверка integer на принадлежность диапозону значений(минимум, максимум)
     *
-    * @param integer $int
-    * @param array $range - array with range(min, max)
+    * @param mixed $value - проверяемое значение
+    * @param array $range - диапозон значений (min, max)
     *
-    * @return validator object 
+    * @return mixed - false/$value
     */
-    public function intRanged(array $range){
+    final public function intRanged($value, array $range){
         $options = array('options' => array());  
         if(isset($range[0]))
             $options['options']['min_range'] = (int)$range[0];
         if(isset($range[1]))
             $options['options']['max_range'] = (int)$range[1];
-        if(!filter_var($this->value, FILTER_VALIDATE_INT, $options))
-            $this->error++;
-        return $this;
+        if(!filter_var($value, FILTER_VALIDATE_INT, $options))
+            return false;
+        return $value;
     }
     /**
-    * Positive integer validation
+    * Валидация положительного integer
     *
-    * @param integer $int
+    * @param mixed $value - проверяемое значение
     * 
-    * @return validator object 
+    * @return mixed - false/$value
     */
-    public function intPositive(){
+    final public function intPositive($value){
         $options = array('options' => array());  
         $options['options']['min_range'] = 1;
-        if(!filter_var($this->value, FILTER_VALIDATE_INT, $options))
-          $this->error++;    
-        return $this;
+        if(!filter_var($value, FILTER_VALIDATE_INT, $options))
+          return false;
+        return $value;
     }
     /**
-    * Negative integer validation
+    * Валидация отрицательного integer
     *
-    * @param integer $int
+    * @param mixed $value - проверяемое значение
     * 
-    * @return validator object 
+    * @return mixed - false/$value
     */
-    public function intNegative(){
+    final public function intNegative($value){
         $options = array('options' => array());  
         $options['options']['max_range'] = -1;
-        if(!filter_var($this->value, FILTER_VALIDATE_INT, $options))
-            $this->error++;    
-        return $this;
+        if(!filter_var($value, FILTER_VALIDATE_INT, $options))
+            return false;
+        return $value;
     }
     /**
-    * Validation elements of array for int
+    * Проверка массива данных на пренадлежность каждого элемента массива типу integer
     *
-    * @param array $array
+    * @param array $array - массив значений
     * 
-    * @return validator object 
+    * @return array $array - массив с валидированными значениями
     */
-    public function intergerFromList(array $array){
+    final public function intergerFromList(array $array){
         $intArray = array();
         foreach($array as $value){
             if(filter_var($value, FILTER_VALIDATE_INT)){
@@ -132,49 +108,49 @@ class Validator{
         return $array;
     }
     /**
-    * Float validation
+    * Валидации значений типа float
     *
-    * @param float $float
+    * @param mixed $value - проверяемое значение
     * 
-    * @return validator object 
+    * @return mixed - false/$value
     */
-    public function float(){
-        if(!preg_match( "/^[\-]?[0-9]*\.[0-9]*$/", $this->value))
-            $this->error++;    
-        return $this;
+    final public function float($value){
+        if(!preg_match( "/^[\-]?[0-9]*\.[0-9]*$/", $value))
+            return false;
+        return $value;
     }
     /**
-    *  Positive float validation
+    *  Валидация положительного float
     *
-    * @param float $float
+    * @param mixed $value - проверяемое значение
     * 
-    * @return validator object 
+    * @return mixed - false/$value
     */
-    public function floatPositive(){
-        if(!preg_match( "/^[0-9]*\.[0-9]*$/", $this->value))
-             $this->error++;    
-        return $this; 
+    final public function floatPositive($value){
+        if(!preg_match( "/^[0-9]*\.[0-9]*$/", $value))
+             return false;
+        return $value;
     }
     /**
-    * Negative float validation
+    * Валидации отрицательного float
     *
-    * @param float $float
+    * @param mixed $value - проверяемое значение
     * 
-    * @return validator object 
+    * @return mixed - false/$value
     */
-    public function floatNegative(){
-        if(!preg_match( "/^[\-][0-9]*\.[0-9]*$/", $this->value))
-             $this->error++;    
-        return $this;
+    final public function floatNegative($value){
+        if(!preg_match( "/^[\-][0-9]*\.[0-9]*$/", $value))
+             return false;
+        return $value;
     }   
     /**
-    * Validation elements of array for float
+    * Проверка массива данных на пренадлежность каждого элемента массива типу float
     *
-    * @param array $array
+    * @param array $array - список проверяемых значений
     * 
-    * @return validator object 
+    * @return array $array - массив с валидированными значениями
     */
-    public function floatFromList(array $array){
+    final public function floatFromList(array $array){
         foreach($array as $value){
             if(preg_match( "/^[\-]?[0-9]*\.[0-9]*$/", $value)){
                 $intArray = $value;
@@ -185,131 +161,145 @@ class Validator{
         return $array;
     }
     /**
-    * Boolean validation
-    * 
-    * @return validator object 
+    * Валидация Булева значения
+    *
+    * @param mixed $value - проверяемое значение
+    *
+    * @return mixed - false/$value
     */
-    public function bool(){
-        if(!preg_match("/^(?i:true)$|^(?i:false)$|^1$|^0$/", $this->value))
-            $this->error++;    
-        return $this; 
+    final public function bool($value){
+        if(!preg_match("/^(?i:true)$|^(?i:false)$|^1$|^0$/", $value))
+            return false;
+        return $value;
     }
     /**
-    * Latin name validation
+    * Проверка входного значения на наличие символов отличных от латиницы, цифр от 0 до 9, нижнего подчёркивания и тире
     *
-    * @param array $array - min, max length of string
+    * @param mixed $value - проверяемое значение
+    * @param array $array - максимальная и минимальная длина строки(min,max)
     * 
-    * @return validator object 
+    * @return mixed - false/$value
     */
-    public function latinName(array $array = array(3,16)){
-        if(!preg_match("/^[a-zA-Z0-9_-]{" . $array[0] . "," . $array[1] . "}$/", $this->value))
-            $this->error++;    
-        return $this;
+    final public function latinName($value, array $array = array(3,16)){
+        if(!preg_match("/^[a-zA-Z0-9_-]{" . $array[0] . "," . $array[1] . "}$/", $value))
+            return false;
+        return $value;
     }
     /**
-    * Password validation
+    * Валидации IP адреса
     *
-   * @param array $array - min, max length of string
+    * @param mixed $value - проверяемое значение
+    * @param array $array - максимальная и минимальная длина строки(min,max)
     * 
-    * @return validator object 
+    * @return mixed - false/$value
     */
-    public function pass(array $array = array(8,20)){
-        if(!preg_match("/^[a-zA-Z0-9_-]{" . $array[0] . "," . $array[1] . "}$/", $this->value))
-            $this->error++;    
-        return $this;
+    final public function pass($value, array $array = array(8,20)){
+        if(!preg_match("/^[a-zA-Z0-9_-]{" . $array[0] . "," . $array[1] . "}$/", $value))
+            return false;
+        return $value;
     }
     /**
     * Email validation
     *
-    * @return validator object 
+    * @param mixed $value - проверяемое значение
+    *
+    * @return mixed - false/$value
     */
-    public function email(){
-        if(!filter_var($this->value, FILTER_VALIDATE_EMAIL))
-            $this->error++;    
-        return $this;  
+    final public function email($value){
+        if(!filter_var($value, FILTER_VALIDATE_EMAIL))
+            return false;
+        return $value;
     }
     /**
-    * IP validation
+    * Валидация IP адреса
     *
-    * @return validator object 
+    * @param mixed $value - проверяемое значение
+    *
+    * @return mixed - false/$value
     */
-    public function ip(){
-        if(!filter_var($this->value, FILTER_VALIDATE_IP)) 
-            $this->error++;   
-        return $this;
+    final public function ip($value){
+        if(!filter_var($value, FILTER_VALIDATE_IP))
+            return false;
+        return $value;
     }
     /**
-    * IP validation in integer
+    * Валидация IP адреса в форме целочисленного значения
     *
+    * @param mixed $value - проверяемое значение
     * @param int $output - если указать 'string', то ip будет возвращенно в стандартном строковом значении
     *
-    * @return validator object 
+    * @return mixed - false/$value
     */
-    public function ipInInt($output = 'int'){
-        if((int)$this->value >= 0 and (int)$this->value <= 4294967295){
+    final public function ipInInt($value, array $output = array('int')){
+        if((int)$value >= 0 and (int)$value <= 4294967295){
             if($output == 'string'){
-                $this->value = long2ip($this->value);
+                $value = long2ip($value);
             }
-            return $this;
+            return $value;
         }
-        $this->error++;
-        return $this;
+        return false;
     }
     /**
-    * IP version 4 validation
+    * Валидация IP адреса четвёртой версии(IPv4)
     *
+    * @param mixed $value - проверяемое значение
     * @param string $output - если в output указать int, то ip будет возвращен в целочисленном значении
     * 
-    * @return validator object 
+    * @return mixed - false/$value
     */
-    public function ipV4($output = 'string'){
-        if(!filter_var($this->value, FILTER_VALIDATE_IP,FILTER_FLAG_IPV4))
-            $this->error++;
+    final public function ipV4($value, array $output = array('string')){
+        if(!filter_var($value, FILTER_VALIDATE_IP,FILTER_FLAG_IPV4))
+            return false;
         if($output == 'int'){
-            $this->value = sprintf('%u', ip2long($this->value));
+            $value = sprintf('%u', ip2long($value));
         }
-        return $this;
+        return $value;
     }
     /**
-    * IP version 6 validation
+    * Валидация IP адреса шестой версии(IPv6)
     *
-    * @return validator object 
+    * @param mixed $value - проверяемое значение
+    *
+    * @return mixed - false/$value
     */
-    public function ipV6(){
-        if(!filter_var($this->value, FILTER_VALIDATE_IP,FILTER_FLAG_IPV6))
-            $this->error++;    
-        return $this;
+    final public function ipV6($value){
+        if(!filter_var($value, FILTER_VALIDATE_IP,FILTER_FLAG_IPV6))
+            return false;
+        return $value;
     }
     /**
-    * IP version 6 validation
+    * Проверка IP на принадлежность его диапозонну IP адресов
     *
-    * @param array $array  - min, max range of IP
+    * @param mixed $value - проверяемое значение
+    * @param array $array  - диапозон значений IP - min, max(пример: array(127.01.01.01, 255.127.10.10))
     * 
-    * @return validator object 
+    * @return mixed - false/$value
     */
-    public function ipRanged(array $array){
-        if(filter_var($this->value, FILTER_VALIDATE_IP,FILTER_FLAG_IPV4))
+    final public function ipRanged($value, array $array){
+        if(filter_var($value, FILTER_VALIDATE_IP,FILTER_FLAG_IPV4))
             if(filter_var($array[0], FILTER_VALIDATE_IP,FILTER_FLAG_IPV4))    
                 if(filter_var($array[1], FILTER_VALIDATE_IP,FILTER_FLAG_IPV4)){
-                    $this->value = ip2long($this->value);
+                    $value = ip2long($value);
                     $array[0] = ip2long($array[0]);
                     $array[1] = ip2long($array[1]);
-                    if($array[0] >= $this->value and $this->value <= $array[1]){
-                        $this->value = long2ip($this->value);
-                        return $this;
+                    if($array[0] >= $value and $value <= $array[1]){
+                        $value = long2ip($value);
+                        return $value;
                     }     
                 }
-        $this->error++;
+        return false;
     }
     /**
-    * URL validation
+    * Валидация URL адреса
     *
-    * @return validator object 
+    * @param mixed $value - проверяемое значение
+    *
+    * @return mixed - false/$value
     */
-    public function url(){
-        if(!filter_var($this->value, FILTER_VALIDATE_URL))
-            $this->error++;    
-        return $this;
+    final public function url($value){
+        if(!filter_var($value, FILTER_VALIDATE_URL))
+            return false;
+        return $value;
     }
 }
 ?>

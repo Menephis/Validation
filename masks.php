@@ -2,24 +2,22 @@
 $maskTest = array(
     'userName' => array(
         'latinName' => array(3,16),
-        'required' => null
+        'required' => true
     ),
     'email' =>array(
         'email' => array(8,20),
-        'execute' => null
     ),
     'age' => array(
         'intRanged' => array(14,20),
-        'execute' => null
-        
     ),
     'float' => array(
-        'float' => null,
-        'execute' => null
+        'float' => null
     ),
     'url' => array(
-        'url' => null,
-        'execute' => null
+        'url' => null
+    ),
+    'ip' => array(
+        'ipV4' => array('int')
     )
 );
 ?>
