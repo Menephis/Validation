@@ -27,5 +27,4 @@ $maskTest = array(
         'arguments' => array('int')
     )
 );
-//var_dumpend($maskTest);
 ?>

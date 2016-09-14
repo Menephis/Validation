@@ -13,7 +13,6 @@ class Validator{
          if(isset($args)){
             return $this->$function($value, $args);
         }else{
-            //echo $function . $value . $args . "</br>";
             return $this->$function($value);
         }
     }

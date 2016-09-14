@@ -22,6 +22,7 @@ class MaskValidator extends validator{
                     }elseif($field['required'] == true){
                         throw new Exception('data is not transferred - ' . $key);
                     }
+                }
         }catch(Exception $e){
             $this->_error = $e;
             $this->_answer = null;
