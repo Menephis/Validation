@@ -10,13 +10,13 @@ var_dump($x->ipInInt()->execute());
 
 // Валидация по маске    
 $arr = array(
-    'userName' => 'awdwa', 
+    'userName' => 'wdwa',
     'email' => 'awd',
     'age' => '19',
-    'float'
+    'float' => '2.3'
     
 );
 $y = new MaskValidator($arr, $maskTest);
 ?>
-<pre><?php //var_dump($y->answer);?></pre>
+<pre><?php var_dump($y->answer);?></pre>
 <pre><?php var_dump($arr);?></pre>

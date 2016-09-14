@@ -3,12 +3,11 @@ class Validator{
     public $value;
     private $error = 0;
     /**
-    * Validation length of string
+    * Get value fo validate
     * 
-    * @param string $str - string for validate
-    * @param int $range - length
+    * @param mixed $val - value fo vaidate
     *
-    * @return validator object 
+    * @return void
     */
     public function __construct($val){
         $this->value = $val;
@@ -16,7 +15,7 @@ class Validator{
     /**
     * Check validator for error 
     *
-    * @return mixed $value
+    * @return mixed  - false/$value
     */
     public function execute(){
         if($this->error > 0){
@@ -28,7 +27,7 @@ class Validator{
     /**
     * For require param - throw exception
     *
-    * @return mixed $value
+    * @return mixed  - throw Exception or return $this->value
     */
     public function required(){
         try{
@@ -57,8 +56,6 @@ class Validator{
     /**
     * Validation integer 
     *
-    * @param integer $int
-    *
     * @return validator object 
     */
     public function int(){
@@ -69,7 +66,6 @@ class Validator{
     /**
     * Validation for a range of numbers
     *
-    * @param integer $int
     * @param array $range - array with range(min, max)
     *
     * @return validator object 
@@ -86,8 +82,6 @@ class Validator{
     }
     /**
     * Positive integer validation
-    *
-    * @param integer $int
     * 
     * @return validator object 
     */
@@ -101,8 +95,6 @@ class Validator{
     /**
     * Negative integer validation
     *
-    * @param integer $int
-    * 
     * @return validator object 
     */
     public function intNegative(){
@@ -133,8 +125,6 @@ class Validator{
     }
     /**
     * Float validation
-    *
-    * @param float $float
     * 
     * @return validator object 
     */
@@ -145,8 +135,6 @@ class Validator{
     }
     /**
     *  Positive float validation
-    *
-    * @param float $float
     * 
     * @return validator object 
     */
@@ -157,8 +145,6 @@ class Validator{
     }
     /**
     * Negative float validation
-    *
-    * @param float $float
     * 
     * @return validator object 
     */
@@ -245,9 +231,9 @@ class Validator{
     *
     * @return validator object 
     */
-    public function ipInInt($output = 'int'){
+    public function ipInInt(array $output = array('int')){
         if((int)$this->value >= 0 and (int)$this->value <= 4294967295){
-            if($output == 'string'){
+            if($output == 'int'){
                 $this->value = long2ip($this->value);
             }
             return $this;
@@ -262,10 +248,10 @@ class Validator{
     * 
     * @return validator object 
     */
-    public function ipV4($output = 'string'){
+    public function ipV4(array $output = array('string')){
         if(!filter_var($this->value, FILTER_VALIDATE_IP,FILTER_FLAG_IPV4))
             $this->error++;
-        if($output == 'int'){
+        if($output[0] == 'int'){
             $this->value = sprintf('%u', ip2long($this->value));
         }
         return $this;
