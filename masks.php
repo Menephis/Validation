@@ -1,23 +1,31 @@
 <?php
 $maskTest = array(
     'userName' => array(
-        'latinName' => array(3,16),
+        'method' => 'latinName',
+        'arguments' => array(3,16),
         'required' => true
     ),
     'email' =>array(
-        'email' => array(8,20),
+        'method' => 'email',
+        'arguments' => array(8,20)
     ),
     'age' => array(
-        'intRanged' => array(14,20),
+        'method' => 'intRanged',
+        'arguments' => array(14,20)
     ),
     'float' => array(
-        'float' => null
+        'method' => 'float',
+        'arguments' => null,
+        'required' => true
     ),
     'url' => array(
-        'url' => null
+        'method' => 'url',
+        'arguments' => null
     ),
     'ip' => array(
-        'ipV4' => array('int')
+        'method' => 'ipV4',
+        'arguments' => array('int')
     )
 );
+//var_dumpend($maskTest);
 ?>

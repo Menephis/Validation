@@ -13,28 +13,19 @@ class MaskValidator extends validator{
     final function __construct(array $data, array $mask){
         try{
             $validator = new Validator();
-            foreach($data as $dataKey => $value){
                 foreach($mask as $key => $field){
-                    if($dataKey === $key){
-                        foreach($field as $method => $args){
-                            if($method == 'required'){
-                                continue;
-                            }else{
-                                $this->_answer[$key] = $validator($method, $value, $args);
-                            }
+                    if(isset($data[$key])){
+                        $this->_answer[$key] = $validator($field['method'], $data[$key], $field['arguments']);
+                        if(($field['required'] == true) and ($this->_answer[$key] === false)){
+                             throw new Exception('Stoped on - ' . $key);
                         }
+                    }elseif($field['required'] == true){
+                        throw new Exception('data is not transferred - ' . $key);
                     }
-                    if(isset($field['required']))
-                        $require[] = $key;
-                }
-            }
-            foreach($require as $reqs){
-                if(!isset($this->_answer[$reqs]))
-                    throw new Exception('data is not transferred - ' . $reqs);
-            }
         }catch(Exception $e){
             $this->_error = $e;
             $this->_answer = null;
+            return false;
         }
     }
 }
