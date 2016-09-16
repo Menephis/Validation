@@ -1,11 +1,11 @@
 <?php
 require_once 'Validator.class.php';
-require_once 'MaskValidator.class.php';
+//require_once 'MaskValidator.class.php';
 require_once 'masks.php';
 
 // Простая валидация 
 $z = '4294967193';
-$x = new Validator($z);
+$x = new Validator();
 //var_dump($x->ipInInt()->execute());
 
 // Валидация по маске    
@@ -18,7 +18,8 @@ $arr = array(
     'ip' => '127.56.1.1'
     
 );
-$y = new MaskValidator($arr, $maskTest);
+$y = new Validator();
+$y($arr, $maskTest);
 
 ?>
 <pre><?php var_dump($y->_answer);?></pre>

@@ -16,7 +16,7 @@ class Validator{
     *
     * @param array $data - массив с информацией для прохождения процесса валидации
     *
-    * @return array - Возвращает в переменную класса $_answer либо массив валидированными данными, либо false
+    * @return array - Возвращает в переменную класса $_answer либо массив валидированными данными, либо false 
     */
     final function __invoke(array $data, array $mask){
         try{
@@ -45,7 +45,7 @@ class Validator{
     */
     final public function checkMask(array $mask){
         try{
-            $example = 'Example:
+            $example = 'Example: 
             $mask = array(
                 userName => array(
                     method => latinName,
@@ -74,7 +74,7 @@ class Validator{
                     throw new Exception('
                     Description of field must have 2 or 3 parameters ' . $example);
                 }
-            }
+            } 
         return true;
         }catch(Exception $e){
             $this->_error = $e;
@@ -263,7 +263,7 @@ class Validator{
         return $value;
     }
     /**
-    * Валидация email'a
+    * Валидация email'a 
     *
     * @param mixed $value - проверяемое значение
     *
@@ -367,3 +367,4 @@ class Validator{
     }
 }
 ?>
+

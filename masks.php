@@ -3,7 +3,7 @@ $maskTest = array(
     'userName' => array(
         'method' => 'latinName',
         'arguments' => array(3,16),
-        'required' => true
+        'required' => true,
     ),
     'email' =>array(
         'method' => 'email',
