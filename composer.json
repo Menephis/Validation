@@ -1,5 +1,5 @@
 {
-    "name": "kurapov/validate",
+    "name": "kurapov/kurapov_validate",
     "homepage": "https://github.com/Menephis/Validation",
     "description": "Custom validation pack for validate on mask and single validate",
     "type": "library",
