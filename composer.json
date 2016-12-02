@@ -13,6 +13,13 @@
             "email": "spawnrus56@gmail.com"
         }
     ],
-    "minimum-stability": "dev"
+    "autoload": {
+        "psr-4": {
+            "kurapov\\kurapov_validate\\": ""
+        }
+    },
+    "minimum-stability": "dev",
+    "require-dev": {
+        "phpdocumentor/phpdocumentor": "^2.9"
+    }
 }
-

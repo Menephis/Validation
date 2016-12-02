@@ -1,7 +1,2 @@
-﻿# Игнор-лист файлов проекта
-
-/test/testForFunction.php
-/test/testExeFunction.php
-/test/forProcedure.php
-/test/form.php
-.htaccess
+# Игнор-лист файлов проекта
+test.php
