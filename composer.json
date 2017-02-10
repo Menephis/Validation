@@ -1,25 +1,23 @@
 {
-    "name": "kurapov/kurapov_validate",
+    "name": "menephis/mask-validator",
     "homepage": "https://github.com/Menephis/Validation",
     "description": "Custom validation pack for validate on mask and single validate",
     "type": "library",
     "require": {
-        "php": ">=5.3"
+        "php": ">=5.3",
+        "mustangostang/spyc": "*"
     },
-    "license": "nope",
+    "license": "MIT",
     "authors": [
         {
-            "name": "kurapov Pavel",
+            "name": "Kurapov Pavel",
             "email": "spawnrus56@gmail.com"
         }
     ],
     "autoload": {
         "psr-4": {
-            "kurapov\\kurapov_validate\\": ""
+            "Menephis\\MaskValidator\\": "src/"
         }
     },
-    "minimum-stability": "dev",
-    "require-dev": {
-        "phpdocumentor/phpdocumentor": "^2.9"
-    }
+    "minimum-stability": "dev"
 }

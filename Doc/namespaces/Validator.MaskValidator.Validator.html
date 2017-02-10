@@ -21,55 +21,7 @@
     <script src="../js/jquery.smooth-scroll.js"></script>
     <script src="../js/prism.min.js"></script>
     <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
-        <script type="text/javascript">
-        function loadExternalCodeSnippets() {
-            Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
-                var src = pre.getAttribute('data-src');
-                var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
-                var language = 'php';
-
-                var code = document.createElement('code');
-                code.className = 'language-' + language;
-
-                pre.textContent = '';
-
-                code.textContent = 'Loading…';
-
-                pre.appendChild(code);
-
-                var xhr = new XMLHttpRequest();
-
-                xhr.open('GET', src, true);
-
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState == 4) {
-
-                        if (xhr.status < 400 && xhr.responseText) {
-                            code.textContent = xhr.responseText;
-
-                            Prism.highlightElement(code);
-                        }
-                        else if (xhr.status >= 400) {
-                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
-                        }
-                        else {
-                            code.textContent = '✖ Error: File does not exist or is empty';
-                        }
-                    }
-                };
-
-                xhr.send(null);
-            });
-        }
-
-        $(document).ready(function(){
-            loadExternalCodeSnippets();
-        });
-        $('#source-view').on('shown', function () {
-            loadExternalCodeSnippets();
-        })
-    </script>
-
+    
     <link rel="shortcut icon" href="../images/favicon.ico"/>
     <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
     <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
@@ -92,7 +44,7 @@
                             API Documentation <b class="caret"></b>
                         </a>
                         <ul class="dropdown-menu">
-                                                        <li><a href="../namespaces/Menephis.html">\Menephis</a></li>
+                                                        <li><a href="../namespaces/Validator.html">\Validator</a></li>
                                                     </ul>
                     </li>
                                         <li class="dropdown" id="charts-menu">
@@ -144,42 +96,42 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1111577028"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1824089977"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1111577028" class="accordion-body collapse in">
+            <div id="namespace-1824089977" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-597401643"></a>
-                                <a href="../namespaces/Menephis.html" style="margin-left: 30px; padding-left: 0">Menephis</a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1897197850"></a>
+                                <a href="../namespaces/Validator.html" style="margin-left: 30px; padding-left: 0">Validator</a>
             </div>
-            <div id="namespace-597401643" class="accordion-body collapse ">
+            <div id="namespace-1897197850" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-581818260"></a>
-                                <a href="../namespaces/Menephis.MaskValidator.html" style="margin-left: 30px; padding-left: 0">MaskValidator</a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-863060356"></a>
+                                <a href="../namespaces/Validator.MaskValidator.html" style="margin-left: 30px; padding-left: 0">MaskValidator</a>
             </div>
-            <div id="namespace-581818260" class="accordion-body collapse ">
+            <div id="namespace-863060356" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1369842637"></a>
-                                <a href="../namespaces/Menephis.MaskValidator.Exception.html" style="margin-left: 30px; padding-left: 0">Exception</a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-564034045"></a>
+                                <a href="../namespaces/Validator.MaskValidator.Exception.html" style="margin-left: 30px; padding-left: 0">Exception</a>
             </div>
-            <div id="namespace-1369842637" class="accordion-body collapse ">
+            <div id="namespace-564034045" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
                     <ul>
-                                                                                                    <li class="class"><a href="../classes/Menephis.MaskValidator.Exception.InvalidMaskException.html">InvalidMaskException</a></li>
+                                                                                                    <li class="class"><a href="../classes/Validator.MaskValidator.Exception.InvalidMaskException.html">InvalidMaskException</a></li>
                                             </ul>
                 </div>
             </div>
@@ -189,17 +141,17 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1347362234"></a>
-                                <a href="../namespaces/Menephis.MaskValidator.Masks.html" style="margin-left: 30px; padding-left: 0">Masks</a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-34826893"></a>
+                                <a href="../namespaces/Validator.MaskValidator.Masks.html" style="margin-left: 30px; padding-left: 0">Masks</a>
             </div>
-            <div id="namespace-1347362234" class="accordion-body collapse ">
+            <div id="namespace-34826893" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
                     <ul>
-                                                                                                    <li class="class"><a href="../classes/Menephis.MaskValidator.Masks.AbstractMask.html">AbstractMask</a></li>
-                                                    <li class="class"><a href="../classes/Menephis.MaskValidator.Masks.AuthenticationMask.html">AuthenticationMask</a></li>
-                                                    <li class="class"><a href="../classes/Menephis.MaskValidator.Masks.TestMask.html">TestMask</a></li>
+                                                                                                    <li class="class"><a href="../classes/Validator.MaskValidator.Masks.AbstractMask.html">AbstractMask</a></li>
+                                                    <li class="class"><a href="../classes/Validator.MaskValidator.Masks.AuthenticationMask.html">AuthenticationMask</a></li>
+                                                    <li class="class"><a href="../classes/Validator.MaskValidator.Masks.TestMask.html">TestMask</a></li>
                                             </ul>
                 </div>
             </div>
@@ -209,16 +161,16 @@
                                                     <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-1472178017"></a>
-                                <a href="../namespaces/Menephis.MaskValidator.Validator.html" style="margin-left: 30px; padding-left: 0">Validator</a>
+                                    <a class="accordion-toggle collapsed" data-toggle="collapse" data-target="#namespace-88899676"></a>
+                                <a href="../namespaces/Validator.MaskValidator.Validator.html" style="margin-left: 30px; padding-left: 0">Validator</a>
             </div>
-            <div id="namespace-1472178017" class="accordion-body collapse ">
+            <div id="namespace-88899676" class="accordion-body collapse ">
                 <div class="accordion-inner">
 
                     
                     <ul>
-                                                                                                    <li class="class"><a href="../classes/Menephis.MaskValidator.Validator.Validator.html">Validator</a></li>
-                                                    <li class="class"><a href="../classes/Menephis.MaskValidator.Validator.ValidedField.html">ValidedField</a></li>
+                                                                                                    <li class="class"><a href="../classes/Validator.MaskValidator.Validator.Validator.html">Validator</a></li>
+                                                    <li class="class"><a href="../classes/Validator.MaskValidator.Validator.ValidedField.html">ValidedField</a></li>
                                             </ul>
                 </div>
             </div>
@@ -254,45 +206,41 @@
     <section class="row-fluid">
         <div class="span10 offset2">
             <div class="row-fluid">
-                <div class="span8 content file">
+                <div class="span8 content namespace">
                     <nav>
-                                                                    </nav>
+                                                <a href="../namespaces/Validator.MaskValidator.html">\Validator\MaskValidator</a>
+                                            </nav>
+                    <h1><small>\Validator\MaskValidator</small>Validator</h1>
 
-                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
-                    <h1><small>Masks</small>AuthenticationMask.php</h1>
-                    <p><em>Authentication Mask</em></p>
                     
-
                     
                     
                                         <h2>Classes</h2>
                     <table class="table table-hover">
                                             <tr>
-                            <td><a href="../classes/Menephis.MaskValidator.Masks.AuthenticationMask.html">AuthenticationMask</a></td>
-                            <td><em>AuthenticationMask for validate authentication data</em></td>
+                            <td><a href="../classes/Validator.MaskValidator.Validator.Validator.html">Validator</a></td>
+                            <td><em>Main validator class</em></td>
+                        </tr>
+                                            <tr>
+                            <td><a href="../classes/Validator.MaskValidator.Validator.ValidedField.html">ValidedField</a></td>
+                            <td><em>Class Valided Field points to valided data or not</em></td>
                         </tr>
                                         </table>
                                     </div>
 
                 <aside class="span4 detailsbar">
                     <dl>
-                                                    <dt>Package</dt>
-                            <dd><div class="namespace-wrapper">\Validation\Masks</div></dd>
-                        
-                        
+                        <dt>Namespace hierarchy</dt>
+                        <dd class="hierarchy">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                                    <div class="namespace-wrapper"><a href="../namespaces/default.html">\</a></div>
+                                                            
+                                    <div class="namespace-wrapper"><a href="../namespaces/Validator.html">\Validator</a></div>
+                                                            
+                                    <div class="namespace-wrapper"><a href="../namespaces/Validator.MaskValidator.html">\Validator\MaskValidator</a></div>
+                                                                                        <div class="namespace-wrapper">\Validator\MaskValidator\Validator</div>
+                        </dd>
                     </dl>
-                    <h2>Tags</h2>
-                    <table class="table table-condensed">
-                                                    <tr>
-                                <th>
-                                    author
-                                </th>
-                                <td>
-                                                                            <p>Kurapov Pavel <a href="mailto:spawnrus56@gmail.com">spawnrus56@gmail.com</a></p>
-                                                                    </td>
-                            </tr>
-                                            </table>
-
                 </aside>
             </div>
 
@@ -300,16 +248,6 @@
             
         </div>
     </section>
-
-    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
-        <div class="modal-header">
-            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="source-view-label"></h3>
-        </div>
-        <div class="modal-body">
-            <pre data-src="../files/Masks/AuthenticationMask.php.txt" class="language-php line-numbers"></pre>
-        </div>
-    </div>
 
     <footer class="row-fluid">
         <section class="span10 offset2">
@@ -320,7 +258,7 @@
                                                         <h1><i class="icon-code"></i></h1>
                             <div>
                                 <ul>
-                                                                            <li><a href="../namespaces/Menephis.html">\Menephis</a></li>
+                                                                            <li><a href="../namespaces/Validator.html">\Validator</a></li>
                                                                     </ul>
                             </div>
                         </section>
@@ -348,7 +286,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on February 10th, 2017 at 05:13.
+                    on February 10th, 2017 at 04:06.
                 </section>
             </section>
         </section>

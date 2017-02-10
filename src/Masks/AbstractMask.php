@@ -75,7 +75,6 @@ abstract class AbstractMask
     {
         try
         {
-            var_dump($mask);
             if(count($mask) === 0  or ! is_array($mask))
                 throw new InvalidMaskException('Mask must be array and have at least one value');
             foreach($mask as $key => $value){

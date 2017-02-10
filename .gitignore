@@ -1,2 +1,5 @@
 # Игнор-лист файлов проекта
-test.php
+/test.php
+/b.yaml
+/a.php
+

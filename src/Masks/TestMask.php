@@ -123,4 +123,3 @@ class TestMask extends AbstractMask
     );
 }
 ?>
-
