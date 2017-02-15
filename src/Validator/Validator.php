@@ -77,8 +77,10 @@ class Validator
                     }else{
                         $this->data[$key] = (new ValidedField($data[$key]))->correct();
                     }
-                }elseif($field['required'] === true){
-                    $this->isValid = false;
+                }else{
+                    if($field['required'] === true)
+                        $this->isValid = false;
+                    $this->data[$key] = new ValidedField(null);
                 }
             }
             return $this->data;
@@ -100,6 +102,8 @@ class Validator
     public function getDataAsArray()
     {
         $array = array();
+        if( ! $this->data)
+            return null;
         foreach($this->data as $key => $value)
             $array[$key] = $value->getValidedData();
         return $array;

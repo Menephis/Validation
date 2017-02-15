@@ -31,9 +31,7 @@ abstract class AbstractMask
     */
     public function getMask()
     {
-        if(isset($this->maskComposite[$this->currentMask]))
-            return $this->maskComposite[$this->currentMask];
-        return null;
+        return $this->maskComposite[$this->currentMask] ?? null;
     }
     /**
     * Add mask 
