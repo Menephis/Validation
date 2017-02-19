@@ -36,6 +36,8 @@ class Validator
     * Construct
     *
     * @param array $mask
+    * 
+    * @throws InvalidMaskException - if mask doesn't exist in property or mask is invalid
     */
     public function __construct(AbstractMask $mask)
     {
@@ -197,13 +199,9 @@ class Validator
     * @return array $valueArray - массив с валидированными значениями
     */
     public function intFromList(array $valueArray){
-        foreach($valueArray as & $value){
-            if(filter_var($value, FILTER_VALIDATE_INT)){
-                continue;
-            }else{
-                $value = false;
-            }
-                
+        foreach($valueArray as $value){
+            if( ! filter_var($value, FILTER_VALIDATE_INT))
+                return false;     
         }
         return $valueArray;
     }
@@ -251,12 +249,9 @@ class Validator
     * @return array $valueArray - массив с валидированными значениями
     */
     public function floatFromList(array $valueArray){
-        foreach($valueArray as & $value){
-            if(preg_match( "/^[\-]?[0-9]*\.[0-9]*$/", $value)){
-                continue;
-            }else{
-                $value = false;
-            }
+        foreach($valueArray as $value){
+            if( ! preg_match( "/^[\-]?[0-9]*\.[0-9]*$/", $value))
+                return false;
         }
         return $valueArray;
     }

@@ -9,7 +9,7 @@
 namespace Menephis\MaskValidator\Masks;
 
 
-use Menephis\MaskValidator\Exception\InvalidMaskException;
+use Menephis\MaskValidator\Exception\{ InvalidMaskException, FileNotFoundException};
 
 /**
 * AbstractMask class for extending
@@ -106,6 +106,8 @@ abstract class AbstractMask
     */
     public function loadFromYaml(string $path, $maskName, bool $switchMask = false)
     {
+        if( ! is_file($path))
+            throw new FileNotFoundException(sprintf('No such file on path - %s', $path));
         $yaml = \Spyc::YAMLLoad($path);
         $this->maskComposite[$maskName] = $yaml;
         if($switchMask){
